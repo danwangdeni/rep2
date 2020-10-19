@@ -17,12 +17,21 @@ public class ProductController {
     @Autowired
     private IproductService productService;
 
-    @RequestMapping("/findAll.dao")
+    //产品添加
+    @RequestMapping("/save.do")
+    public String  save(Product product) throws Exception {
+        productService.save(product);
+        return "redirect:findAll.do";
+    }
+
+
+    //查询全部产品
+    @RequestMapping("/findAll.do")
     public ModelAndView findAll() throws Exception {
     ModelAndView mv = new ModelAndView();
         List<Product> ps= productService.findAll();
-        mv.addObject("",ps);
-        mv.setViewName("");
+        mv.addObject("productList",ps);
+        mv.setViewName("product-list1");
     return mv;
     }
 }

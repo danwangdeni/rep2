@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ProductServiceImpl implements IproductService {
+    // merge the incoming changes into the current branch
 
     @Autowired
     private IProductDao producDao;
@@ -19,5 +20,10 @@ public class ProductServiceImpl implements IproductService {
     @Override
     public List<Product> findAll() throws Exception {
         return producDao.findAll();
+    }
+
+    @Override
+    public void save(Product product) throws Exception {
+        producDao.save(product);
     }
 }
