@@ -40,9 +40,11 @@ public class OrdersControllerpr {
     }
 
     @RequestMapping("/findById.do")
-    public ModelAndView findById(@RequestParam(name = "id",required = true) String orderId){
+    public ModelAndView findById(@RequestParam(name = "id",required = true) String orderId) throws Exception {
         ModelAndView mv=new ModelAndView();
         Orders orders=ordersService.findById(orderId);
-        return null;
+        mv.addObject("orders",orders);
+        mv.setViewName("orders-show");
+        return mv;
     }
 }

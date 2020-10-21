@@ -3,10 +3,7 @@ package com.itheima.ssm.dao;
 import com.itheima.ssm.domain.Member;
 import com.itheima.ssm.domain.Orders;
 import com.itheima.ssm.domain.Product;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -40,7 +37,9 @@ public interface IOrdersDao {
             @Result(property = "product",column = "productId",javaType = Product.class,
                     one = @One(select = "com.itheima.ssm.dao.IProductDao.findById")),
             @Result(property = "member",column = "memberId",javaType = Member.class,
-                    one=@One(select = "com.itheima.ssm.dao.IMemberDao.findById"))
+                    one=@One(select = "com.itheima.ssm.dao.IMemberDao.findById")),
+            @Result(property = "travellers", column = "id",javaType = java.util.List.class,
+                    many = @Many(select="com.itheima.ssm.dao.ITravellerDao.findByOrderId")),
     })
     public Orders findById(String orderId) throws Exception;
 }
