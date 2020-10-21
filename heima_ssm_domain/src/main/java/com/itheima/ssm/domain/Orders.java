@@ -1,5 +1,7 @@
 package com.itheima.ssm.domain;
 
+import com.itheima.ssm.utils.DateUtils;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Orders {
     private String orderNum;
     private Date orderTime;
     private String orderTimeStr;
+    private String orderStatusStr;
     private int orderStatus;
     private int peopleCount;
     private Product product;
@@ -17,6 +20,19 @@ public class Orders {
     private Integer payType;
     private String payTypeStr;
     private String orderDesc;
+
+    public String getOrderStatusStr() {
+        if (orderStatus==0){
+            orderStatusStr="未支付";
+        }else if (orderStatus==1){
+            orderStatusStr="已支付";
+        }
+        return orderStatusStr;
+    }
+
+    public void setOrderStatusStr(String orderStatusStr) {
+        this.orderStatusStr = orderStatusStr;
+    }
 
     public String getId() {
         return id;
@@ -43,6 +59,9 @@ public class Orders {
     }
 
     public String getOrderTimeStr() {
+        if (orderTime !=null){
+            orderTimeStr=DateUtils.dataToString(orderTime,"yyyy-MM-dd HH:mm");
+        }
         return orderTimeStr;
     }
 
@@ -99,6 +118,14 @@ public class Orders {
     }
 
     public String getPayTypeStr() {
+        if (payType ==0){
+            payTypeStr ="支付宝";
+        }else if (payType ==1){
+            payTypeStr ="微信";
+        }else {
+            payTypeStr ="其它";
+        }
+
         return payTypeStr;
     }
 
